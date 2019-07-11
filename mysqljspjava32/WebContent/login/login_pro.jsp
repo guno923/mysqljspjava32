@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<%@ page import = "java.util.ArrayList" %>
 <%@ page import="kr.or.ksmart.dao.Mdao" %>
 
 <% request.setCharacterEncoding("euc-kr"); %>
@@ -23,9 +22,9 @@
 		session.setAttribute("S_LEVEL", mb.getM_level());
 		alert = "로그인성공";
 	}else if(result.equals("비번불일치")) {
-		
+		alert = "비번불일치";
 	}else if(result.equals("아이디불일치")) {
-		
+		alert = "아이디불일치";
 	}
 	//response.sendRedirect(request.getContextPath()+"/index.jsp");
 %>

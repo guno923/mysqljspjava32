@@ -23,7 +23,7 @@ public class Mdao {
 		conn = db.driverDbcon();
 		System.out.println("###############");
 		System.out.println(conn + "<-- conn_mGetForSession_Mdao.java");
-		pstmt= conn.prepareStatement("SELECT * FROM tb_member where m_id=?");
+		pstmt= conn.prepareStatement("SELECT m_id,m_name,m_level FROM tb_member where m_id=?");
 		pstmt.setString(1, in_id);
 		System.out.println(pstmt+"<-pstmt_mGetForSession_Mdao.java");
 
