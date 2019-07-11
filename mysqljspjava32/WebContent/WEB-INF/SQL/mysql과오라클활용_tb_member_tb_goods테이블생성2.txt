@@ -1,0 +1,40 @@
+create table tb_member(
+m_id VARCHAR(10) NOT NULL PRIMARY KEY,
+m_pw VARCHAR(10) NOT NULL,
+m_level VARCHAR(10) NOT NULL,
+m_name VARCHAR(20) NOT NULL,
+m_email VARCHAR(80)
+)DEFAULT CHARSET=euckr;
+insert into tb_member values('id001','pw001','관리자','홍01','test01');
+insert into tb_member values('id002','pw002','판매자','홍02','test02');
+insert into tb_member values('id003','pw003','판매자','홍03','test03');
+insert into tb_member values('id004','pw004','구매자','홍04','test04');
+insert into tb_member values('id005','pw005','구매자','홍05','test05');
+insert into tb_member values('id006','pw006','판매자','홍06','test06');
+insert into tb_member values('id007','pw007','구매자','홍07','test07');
+
+
+create table tb_goods(
+g_code VARCHAR(20) NOT NULL PRIMARY KEY,
+m_id VARCHAR(20) NOT NULL,
+g_name VARCHAR(20) NOT NULL,
+g_cate VARCHAR(20) NOT NULL,
+g_price VARCHAR(20) NOT NULL,
+g_color VARCHAR(20) NOT NULL,
+g_size VARCHAR(20) NOT NULL,
+g_date VARCHAR(20) NOT NULL,
+g_desc VARCHAR(80)
+)DEFAULT CHARSET=euckr;
+
+INSERT INTO tb_goods VALUES ('goods_1', 'id003', 'ACHIEVA', '모니터', '100000', 'black', '33', '2019-05-15 15:20:32', '아취바');
+INSERT INTO tb_goods VALUES ('goods_2', 'id002', '바삭구워', '오븐', '200000', 'pink', '40', 2019-07-21 15:20:32, '다구웠다');
+INSERT INTO tb_goods VALUES ('goods_3', 'id002', '다이슨', '청소기', '800000', 'blue', '120', 2019-04-16 09:44:06, '청소끝');
+INSERT INTO tb_goods VALUES ('goods_4', 'id003', '갤럭시', '스마트폰', '400000', 'black', '25', 2019-02-28 11:13:02, '신버전');
+INSERT INTO tb_goods VALUES ('goods_5', 'id006', '삼선', '슬리퍼', '5000', 'black', '25', 2019-03-24 13:33:05, '누구나있다');
+INSERT INTO tb_goods VALUES ('goods_6', 'id006', '슬랙스', '바지', '34000', 'brown', '28', 2019-06-04 11:27:58, '편안하다너무');
+INSERT INTO tb_goods VALUES ('goods_7', 'id006', '칼하트', '반팔', '34000', 'blue', '30', 2019-05-24 11:30:08, '색깔이 블루다');
+INSERT INTO tb_goods VALUES ('goods_8', 'id003', '캉골', '반팔', '54000', 'white', '33', 2019-06-28 11:31:16, '와 가격봐봐');
+
+
+
+
