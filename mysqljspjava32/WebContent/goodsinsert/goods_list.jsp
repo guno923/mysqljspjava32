@@ -7,13 +7,13 @@
 <%@ page import = "java.sql.ResultSet" %>
 <%@ page import = "java.sql.SQLException" %>
 
-<%@ include file = "/goods/goods_insert_form.jsp" %>
+<%@ include file = "/goodsinsert/goods_insert_form.jsp" %>
 
 <br>
 상품 리스트 <br>
 <table width="100%" border="1">
 <tr>
-	<td>판매자</td><td>상품명</td><td>카테고리</td><td>가격</td><td>색상</td><td>사이즈</td>
+	<td>판매자</td><td>상품명</td><td>카테고리</td><td>가격</td><td>색상</td><td>사이즈</td><td>상세정보</td><td>삭제</td>
 </tr>
 
 <%
@@ -49,13 +49,16 @@
 		<td><%= rs.getString("g_price")%></td>
 		<td><%= rs.getString("g_color")%></td>
 		<td><%= rs.getString("g_size")%></td>
+		<td>
+		<a href="<%= request.getContextPath() %>/goodsupdate/goods_update_form.jsp?send_de=<%= rs.getString("g_code")%>">상세정보</a>
+		</td>
+		<td>
+		<a href="<%= request.getContextPath() %>/mdelete/m_delete_pro.jsp?del_id=<%= rs.getString("g_code") %>">삭제</a>
+		</td>
 		</tr>
 		
 <%		
-
 		}
-
-
 	} catch(SQLException ex) {
 		out.println(ex.getMessage());
 		ex.printStackTrace();

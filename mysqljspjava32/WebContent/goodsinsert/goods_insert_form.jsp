@@ -15,7 +15,7 @@
 
 상품등록<br><br>
 
-<form action="<%= request.getContextPath() %>/goods/goods_insert_pro.jsp" method="post">
+<form action="<%= request.getContextPath() %>/goodsinsert/goods_insert_pro.jsp" method="post">
 <!-- <input type = "hidden" name = "g_code"> -->
 
 <input type="hidden" name="m_id" value="<%= S_ID %>">

@@ -63,7 +63,7 @@ try{
 	
 	int insertResult = pstmt_insert.executeUpdate();
 	System.out.println(insertResult + "<-- insertResult 상품등록결과");
-	
+	response.sendRedirect(request.getContextPath()+"/goodssearch/goods_search_list.jsp");
 	//rs_insert.close();
 	//pstmt_insert.close();
 } catch(SQLException ex) {

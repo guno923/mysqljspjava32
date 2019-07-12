@@ -19,10 +19,10 @@
 <%@ include file="/module/top.jsp" %>
 <%@ include file="/module/left.jsp" %>	 
 
-<%@ include file="/goods/goods_search_form.jsp" %>
+<%@ include file="/goodssearch/goods_search_form.jsp" %>
 <table width="100%" border="1">
 <tr>
-	<td>판매자</td><td>상품명</td><td>카테고리</td><td>가격</td><td>색상</td><td>사이즈</td><td>등록일</td>
+	<td>판매자</td><td>상품명</td><td>카테고리</td><td>가격</td><td>색상</td><td>사이즈</td><td>등록일</td><td>상세정보</td><td>삭제</td>
 </tr>
 <%
 Connection conn = null;
@@ -34,13 +34,13 @@ String date2 = request.getParameter("datet");
 String gprice1 = request.getParameter("gprice1");
 String gprice2 = request.getParameter("gprice2");
 String gname = request.getParameter("gname");
- 
+String gpricet = request.getParameter("pricet");
 System.out.println(date1 + "<-date1");
 System.out.println(date2 + "<-date2");
 System.out.println(gprice1 + "<-gprice1");
 System.out.println(gprice2 + "<-gprice2");
 System.out.println(gname + "<-gname");
-
+System.out.println(gpricet + "<-gpricet");
 Class.forName("com.mysql.jdbc.Driver");
 
 try{
@@ -54,25 +54,25 @@ try{
 		pstmt = conn.prepareStatement("SELECT * FROM tb_goods");
 		System.out.println(rs + "<-rs goods_search_list.jsp");
 	} else if(date1 != null & date2 != null) {
-		if(gprice1.equals("")& gprice2.equals("") & gname.equals("")) {
-			pstmt = conn.prepareStatement("select * from tb_goods where g_date between ? and ?");
+		if(gprice1.equals("")& gprice2.equals("") & gname.equals("") & gpricet != null) {
+			pstmt = conn.prepareStatement("select * from tb_goods where g_date between ? and ? order by g_price*1 " + gpricet);
 			pstmt.setString(1, date1);
 			pstmt.setString(2, date2);
-		} else if(gprice1.equals("") & gprice2.equals("") & gname != null) {
-			pstmt = conn.prepareStatement("select * from tb_goods where g_name= ? and g_date between ? and ?");
-			pstmt.setString(1, gname);
-			pstmt.setString(2, date1);
-			pstmt.setString(3, date2);
-		} else if(gprice1 != null & gprice2 != null & gname.equals("")){
-			pstmt = conn.prepareStatement("select * from tb_goods where g_date between ? and ? and g_price*1 between ? and ?");
+		} else if(gprice1 != null & gprice2 != null & gname.equals("") & gpricet != null){
+			pstmt = conn.prepareStatement("select * from tb_goods where g_date between ? and ? and g_price*1 between ? and ? order by g_price*1 " + gpricet);
 			int gprice11 = Integer.parseInt(gprice1);
 			int gprice22 = Integer.parseInt(gprice2);
 			pstmt.setString(1, date1);
 			pstmt.setString(2, date2);
 			pstmt.setInt(3, gprice11);
-			pstmt.setInt(4, gprice22);	
-		} else if(gprice1 != null & gprice2 != null & gname != null) {
-			pstmt = conn.prepareStatement("select * from tb_goods where g_name= ? and g_date between ? and ? and g_price*1 between ? and ?");
+			pstmt.setInt(4, gprice22);
+		} else if(gprice1.equals("") & gprice2.equals("") & gname != null & gpricet != null) {
+			pstmt = conn.prepareStatement("select * from tb_goods where g_name= ? and g_date between ? and ? order by g_price*1 " + gpricet);
+			pstmt.setString(1, gname);
+			pstmt.setString(2, date1);
+			pstmt.setString(3, date2);
+		} else if(gprice1 != null & gprice2 != null & gname != null & gpricet != null) {
+			pstmt = conn.prepareStatement("select * from tb_goods where g_name= ? and g_date between ? and ? and g_price*1 between ? and ? order by g_price*1 " + gpricet);
 			int gprice11 = Integer.parseInt(gprice1);
 			int gprice22 = Integer.parseInt(gprice2);
 			pstmt.setString(1, gname);
@@ -98,7 +98,7 @@ try{
 			pstmt.setInt(3, gprice11);
 			pstmt.setInt(4, gprice22);	
 		} else if(gprice1 != null & gprice2 != null & gname != null) {
-			pstmt = conn.prepareStatement("select * from tb_goods where g_name= ? and g_date between ? and ? and g_price*1 between ? and ? order by g_price*1 desc;");
+			pstmt = conn.prepareStatement("select * from tb_goods where g_name= ? and g_date between ? and ? and g_price*1 between ? and ?");
 			int gprice11 = Integer.parseInt(gprice1);
 			int gprice22 = Integer.parseInt(gprice2);
 			pstmt.setString(1, gname);
@@ -121,6 +121,12 @@ try{
 		<td><%= rs.getString("g_color")%></td>
 		<td><%= rs.getString("g_size")%></td>
 		<td><%= rs.getString("g_date")%></td>
+		<td>
+		<a href="<%= request.getContextPath() %>/goodsdetail/goodsdetail.jsp?send_de=<%= rs.getString("g_code")%>">상세정보</a>
+		</td>
+		<td>
+		<a href="<%= request.getContextPath() %>/goodsdelete/goods_delete_pro.jsp?del_id=<%= rs.getString("g_code") %>">삭제</a>
+		</td>
 		</tr>
 		<%
 	}

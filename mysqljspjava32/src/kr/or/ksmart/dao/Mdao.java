@@ -13,7 +13,6 @@ public class Mdao {
 	Connection conn = null;
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
-	String alert =null;
 	ArrayList<Member> alm = null;
 	//08 세션에 셋팅하기 위한 메서드 선언(아이디, 이름 , 권한)
 	public Member mGetForSession(String in_id) throws ClassNotFoundException, SQLException {
